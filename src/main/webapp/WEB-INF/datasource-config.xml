@@ -24,14 +24,20 @@
     </bean>
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-                <property name="showSql" value="true"/>
-                <property name="generateDdl" value="true"/>
+                <!--<property name="showSql" value="true"/>-->
+                <!--<property name="generateDdl" value="true"/>-->
                 <!--<property name="databasePlatform" value="org.hibernate.dialect.Oracle10gDialect"/>-->
             </bean>
         </property>
-        <property name="dataSource" ref="dataSource"/>
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+            </props>
+        </property>
     </bean>
 
     <!--Конфигурируем транзакционность-->
